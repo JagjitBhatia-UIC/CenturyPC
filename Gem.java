@@ -15,7 +15,7 @@ public class Gem {
         	case 0: return "Yellow";
           case 1: return "Green";
           case 2: return "Blue";
-          case 3: return "Pink";
+          case 3: return "Purple";
           default: return "null";
         }
     }
@@ -28,5 +28,9 @@ public class Gem {
     
     public void upgrade() {
     	if(this.val < 3) this.val += 1;
+    }
+
+    public int getVal() {
+      return val;
     }
   }

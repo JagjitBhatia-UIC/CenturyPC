@@ -1,16 +1,16 @@
-class Main {  
-  public static void main(String args[]) { 
-    Caravan c = new Caravan();
+import java.util.ArrayList;
 
-    c.add(0);
-    c.add(1);
-    c.add(2);
-    c.add(0);
-    c.upgrade(0);
-
+class Main {
+  public static void main(String[] args) {
+   Caravan c = new Caravan();
+   
+   ArrayList<Card> deck = new ArrayList<Card>();
+   deck.add(new CrystalCard());
+   c.add(((CrystalCard) deck.get(0)).gems);
     for(Gem g : c.fetch()) {
       if(g != null) System.out.println(g.color());
     }
-
-  } 
+  
+  System.out.println("Done.");
+  }
 }
