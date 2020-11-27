@@ -9,14 +9,19 @@ public class Caravan {
   public Caravan() {
     inventory = new Gem[10];
     size = 0;
+    excess = new ArrayList<Gem>();
   }
 
   public Gem[] fetch() {
     return inventory;
   }
   
-  // Adds gem to any empty slot -- *Note* Should excess be taken care of here?
+  // Adds gem to any empty slot 
   public void add(int val) {
+    if(size == inventory.length) {
+      excess.add(new Gem(val));
+    }
+
     for(int i = 0; i < inventory.length; i++) {
       if(inventory[i] == null) {
         inventory[i] = new Gem(val);
@@ -26,36 +31,13 @@ public class Caravan {
     }
   }
 
-  public void addExcess(int val) {
-    excess.add(new Gem(val));
-  }
-
   // Adds set of gems passed via parameter to the Caravan. If slots are full, add to excess
   public void add(GemSet gems) {
-      int to_add = gems.size();
-      int excess = 0;
-
-      if((size + to_add) > inventory.length) {
-          excess = inventory.length - size - to_add;
-          to_add -= excess;
-      }
-
-      Gem[] buf = gems.build();
-      int ptr = 0;
-
-      while(to_add > 0 || excess > 0) {
-        if(to_add > 0) {
-          this.add(buf[ptr].getVal());
-          to_add--;
-        }
-
-        else {
-          addExcess(buf[ptr].getVal());
-          excess--;
-        }
-
-        ptr++;
-      }    
+      Gem[] gs = gems.build();
+      
+      for(int i = 0; i<gs.length; i++) {
+        this.add(gs[i].getVal());
+      }  
   }
 
   // Removes gem in specified slot
@@ -67,6 +49,13 @@ public class Caravan {
   // Upgrades gem in specified slot
   public void upgrade(int slot) {
     inventory[slot].upgrade();
+  }
+  
+  // For debug purposes
+  public void printExcess() {
+    for(int i = 0; i<this.excess.size(); i++) {
+      System.out.println(this.excess.get(i).color());
+    }
   }
   
 }
