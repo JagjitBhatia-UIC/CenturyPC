@@ -12,10 +12,48 @@ class Deck {
         cards.add(c);
     }
 
+    // Method to print deck - solely for debugging purposes
+    public void printDeck() {
+        for(int i = 0; i < cards.size(); i++) {
+            if(cards.get(i).type.equals("Crystal")) {
+                CrystalCard cc = (CrystalCard) cards.get(i);
+                System.out.print("CRYSTAL: ");
+                Gem[] crystals = cc.gems.build();
+                for(int j = 0; j<crystals.length; j++) {
+                    System.out.print(crystals[j].color() + " ");
+                }
+                System.out.println("");
+            }
+
+            if(cards.get(i).type.equals("Trade")) {
+                TradeCard tc = (TradeCard) cards.get(i);
+                System.out.print("TRADE: ");
+                Gem[] gives = tc.give.build();
+                Gem[] recvs = tc.receive.build();
+
+                System.out.print("GIVE: ");
+                for(int j = 0; j<gives.length; j++) {
+                    System.out.print(gives[j].color() + " ");
+                }
+
+                System.out.print("RECEIVE: ");
+                for(int j = 0; j<recvs.length; j++) {
+                    System.out.print(recvs[j].color() + " ");
+                }
+                System.out.println("");
+            }
+
+            if(cards.get(i).type.equals("Upgrade")) {
+                UpgradeCard uc = (UpgradeCard) cards.get(i);
+                System.out.println("UPGRADE: " + uc.quantity);
+            }
+        }
+    }
+
     // Method to add card of type specified by image to Deck
     public void add(String filename) {
         filename = filename.split(".png")[0];
-        props = filename.split("_");
+        String[] props = filename.split("_");
 
         // Crystal card file example: crystal_2_yellow.png
         if(props[0].equals("crystal")) {
@@ -39,15 +77,15 @@ class Deck {
   
             boolean isGive = true;
 
-            for(int i = 1; i<set.length; i++) {
+            for(int i = 1; i<props.length; i++) {
                 if(props[i].equals("to")) {
                     isGive = false;
                 }
 
                 else {
-	                int num = Integer.parseInt(props{i]);
-                    if(isGive) gs_give.add(props{i+1], num);
-                    else gs_recv.add(props{i+1], num);    
+	                int num = Integer.parseInt(props[i]);
+                    if(isGive) gs_give.add(props[i+1], num);
+                    else gs_recv.add(props[i+1], num);    
       	            i++;
                 }
             }
