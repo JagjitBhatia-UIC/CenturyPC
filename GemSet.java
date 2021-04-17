@@ -41,4 +41,24 @@ public class GemSet {
     public int size() {
         return yellow + green + blue + purple;
     }
+
+    // Method to add gems to gemset
+    public void add(String color, int num) {
+        switch(color) {
+            case "yellow": 
+                yellow += num;
+                break;
+            case "green":
+                green += num;
+                break;
+            case "blue":
+                blue += num;
+                break;
+            case "purple":
+                purple += num;
+                break;
+            default:
+                break;
+        }
+    }
 }

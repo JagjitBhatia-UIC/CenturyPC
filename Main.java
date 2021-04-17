@@ -2,15 +2,11 @@ import java.util.ArrayList;
 
 class Main {
   public static void main(String[] args) {
-   Caravan c = new Caravan();
-   
-   ArrayList<Card> deck = new ArrayList<Card>();
-   deck.add(new CrystalCard());
-   c.add(((CrystalCard) deck.get(0)).gems);
-    for(Gem g : c.fetch()) {
-      if(g != null) System.out.println(g.color());
-    }
-  
-  System.out.println("Done.");
+    // Test Deck class; Should output Crystal(Blue, 2), Trade((Purple, 2), ((Yellow, 2), (Green, 3))), Upgrade(3)
+    Deck d = new Deck();
+    d.add("crystal_2_blue.png");
+    d.add("trade_2_purple_to_3_green_2_yellow");
+    d.add("upgrade_3");
+    d.printDeck();
   }
 }
